@@ -24,9 +24,12 @@ def save_file(file, user_id):
 
 # 1. SendFace
 @app.route("/sendFace", methods=["POST"])
+@app.route("/sendFace", methods=["POST"])
 def send_face():
     user_id = 12345  # Example user ID
-    files = request.files.getlist("faces")
+    files = request.files.getlist("face1") + request.files.getlist("face2") + \
+            request.files.getlist("face3") + request.files.getlist("face4") + \
+            request.files.getlist("face5")
     for file in files:
         save_file(file, user_id)
     return jsonify({
@@ -86,25 +89,10 @@ def register_user():
         "status_message": "success"
     })
 
-# 5. validateFace
-@app.route("/validateFace", methods=["POST"])
-def validate_face():
-    face = request.files.get("face")
-    save_file(face, "validate_face")
-    return jsonify({
-        "basic_info": {
-            "similarity_score": 95.5,
-            "distance": 0.045,
-            "match": True,
-            "time_spent": "2.3s"
-        },
-        "status_code": "1000",
-        "status_message": "success"
-    })
 
-# 6. getMSISDNLastFive
-@app.route("/getMSISDNLastFive", methods=["POST"])
-def get_msisdn_last_five():
+# 5. findNumber
+@app.route("/findNumber", methods=["POST"])
+def find_number():
     data = request.get_json()
     return jsonify({
         "msisdn_list": {
@@ -118,7 +106,7 @@ def get_msisdn_last_five():
         "status_message": "success"
     })
 
-# 7. getUsersMSISDN
+# 6. getUsersMSISDN
 @app.route("/getUsersMSISDN", methods=["POST"])
 def get_users_msisdn():
     data = request.get_json()
@@ -134,7 +122,7 @@ def get_users_msisdn():
         "status_message": "success"
     })
 
-# 8. assignMSISDN
+# 7. assignMSISDN
 @app.route("/assignMSISDN", methods=["POST"])
 def assign_msisdn():
     data = request.get_json()
@@ -142,6 +130,22 @@ def assign_msisdn():
         "status_code": "1000",
         "status_message": "success"
     })
+# 8. validateFace API
+@app.route("/validateFace", methods=["POST"])
+def validate_face():
+    face = request.files.get("face")
+    save_file(face, "validate_face")
+    return jsonify({
+        "basic_info": {
+            "similarity_score": 95.5,
+            "distance": 0.045,
+            "match": True,
+            "time_spent": "2.3s"
+        },
+        "status_code": "1000",
+        "status_message": "success"
+    })
+
 
 # 9. suspendMSISDN
 @app.route("/suspendMSISDN", methods=["POST"])
@@ -178,23 +182,28 @@ def validate_barcode():
         "status_message": "success"
     })
 
-# 12. getOTP
+
+# 12. getOTP API
 @app.route("/getOTP", methods=["POST"])
 def get_otp():
     data = request.get_json()
+    msisdn = data.get("msisdn")
     return jsonify({
         "status_code": "1000",
         "status_message": "success"
     })
 
-# 13. validateOTP
+# 13. validateOTP API
 @app.route("/validateOTP", methods=["POST"])
 def validate_otp():
     data = request.get_json()
+    msisdn = data.get("msisdn")
+    otp_number = data.get("OTP_number")
     return jsonify({
         "status_code": "1000",
         "status_message": "success"
     })
+	
 
 # Run the Flask app
 if __name__ == "__main__":
