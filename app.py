@@ -56,8 +56,8 @@ def scan_document():
             "dob": "1990-01-01",
             "doe": "2030-01-01",
 	    "doi":"2020-01-01",
-	    "title": "Mr"
-	    "document_type": "National ID"
+	    "title": "Mr",
+	    "document_type": "National ID",
 	    "id_number": "12346"
         },
         "status_code": "1000",
