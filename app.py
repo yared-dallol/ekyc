@@ -98,6 +98,7 @@ def register_user():
 @app.route("/findNumber", methods=["POST"])
 def find_number():
     data = request.get_json()
+    print("Incoming request ",data)
     return jsonify({
         "msisdn_list": {
             "msisdn1": "1234567890",
@@ -130,6 +131,7 @@ def get_users_msisdn():
 @app.route("/assignMSISDN", methods=["POST"])
 def assign_msisdn():
     data = request.get_json()
+    print("Incoming request ",data)
     return jsonify({
         "status_code": "1000",
         "status_message": "success"
