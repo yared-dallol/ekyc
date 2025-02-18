@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 # Base URL
-BASE_URL = "127.0.0.1"
+BASE_URL = "0.0.0.0"
 
 # Temporary storage for uploaded files
 UPLOAD_FOLDER = "uploads"
@@ -198,4 +198,4 @@ def validate_otp():
 
 # Run the Flask app
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
