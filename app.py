@@ -100,16 +100,10 @@ def find_number():
     data = request.get_json()
     print("Incoming request ",data)
     return jsonify({
-        "msisdn_list": {
-            "msisdn1": "1234567890",
-            "msisdn2": "0987654321",
-            "msisdn3": "1122334455",
-            "msisdn4": "5566778899",
-            "msisdn5": "9988776655"
-        },
-        "status_code": "1000",
-        "status_message": "success"
-    })
+    "msisdn_list": ["0799782790","07999111699","0799908432","0799885576", "0799004433"],
+    "status_code": "1000",
+    "status_message": "success"
+})
 
 # 6. getUsersMSISDN
 @app.route("/getUsersMSISDN", methods=["POST"])
