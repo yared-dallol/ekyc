@@ -116,26 +116,39 @@ def find_number():
 def get_users_msisdn():
     data = request.get_json()
     return jsonify({
-        "msisdn_list": {
-            "msisdn1": "1234567890",
-            "msisdn2": "0987654321",
-            "msisdn3": "1122334455",
-            "msisdn4": "5566778899",
-            "msisdn5": "9988776655"
-        },
-        "status_code": "1000",
-        "status_message": "success"
-    })
+    "msisdn_list": ["0799782790","07999111699","0799908432","0799885576", "0799004433"],
+    "status_code": "1000",
+    "status_message": "success"
+}
+)
 
-# 7. assignMSISDN
 @app.route("/assignMSISDN", methods=["POST"])
 def assign_msisdn():
-    data = request.get_json()
-    print("Incoming request ",data)
-    return jsonify({
-        "status_code": "1000",
-        "status_message": "success"
-    })
+    try:
+        # Ensure the request has a JSON body
+        if not request.is_json:
+            return jsonify({
+                "status_code": "415",
+                "status_message": "Unsupported Media Type: Request must be JSON"
+            }), 415
+
+        # Parse the JSON data
+        data = request.get_json()
+        print("Incoming request:", data)
+
+        # Simulate a successful response
+        return jsonify({
+            "status_code": "1000",
+            "status_message": "success"
+        })
+
+    except Exception as e:
+        # Log the error and return a 500 Internal Server Error response
+        print(f"Error processing request: {e}")
+        return jsonify({
+            "status_code": "500",
+            "status_message": f"Internal Server Error: {str(e)}"
+        }), 500
 # 8. validateFace API
 @app.route("/validateFace", methods=["POST"])
 def validate_face():
